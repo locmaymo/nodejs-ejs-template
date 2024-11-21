@@ -1,0 +1,20 @@
+  <h2>Danh sách API Keys</h2>
+  <div id="notification"></div>
+  <ul>
+    <% if (apiKeys && apiKeys.length > 0) { %>
+      <% apiKeys.forEach(function(apiKey) { %>
+        <li>
+          <span><%= apiKey.name %></span>
+          <button class="toggleApiKeyBtn" data-key-id="<%= apiKey._id %>">
+            <% if (apiKey.enabled) { %>
+              Vô hiệu hóa
+            <% } else { %>
+              Kích hoạt
+            <% } %>
+          </button>
+        </li>
+      <% }); %>
+    <% } else { %>
+      <p>Không có API Key nào.</p>
+    <% } %>
+  </ul>
