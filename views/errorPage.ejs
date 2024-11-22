@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="error-container text-center my-5">
+        <h1 class="text-danger mb-4">
+            <i class="fas fa-exclamation-triangle"></i> 
+            Error Occurred
+        </h1>
+        
+        <% if (error && error.message) { %>
+            <div class="alert alert-danger">
+                <%= error.message %>
+            </div>
+        <% } %>
+
+        <div class="mt-4">
+            <p>Something went wrong. Please try again later.</p>
+            <a href="/" class="btn btn-primary mt-3">
+                <i class="fas fa-home"></i> Back to Home
+            </a>
+        </div>
+    </div>
+</div>

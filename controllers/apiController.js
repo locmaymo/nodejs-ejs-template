@@ -1,27 +1,39 @@
+// controllers/apiController.js
 const ApiKey = require('../models/ApiKey');
 
-exports.toggleApiKey = async (req, res) => {
+exports.getApiKeysPage = async (req, res, next) => {
+  try {
+    const apiKeys = await ApiKey.find().sort({ createdAt: 'desc' });
+
+    res.render('apiKey', { title: 'Quản lý API Key', apiKeys });
+  } catch (error) {
+    req.flash('error', 'Đã có lỗi xảy ra. Vui lòng thử lại sau.');
+    next(error); // Sử dụng middleware xử lý lỗi chung
+  }
+};
+
+exports.toggleApiKey = async (req, res, next) => {
   const keyId = req.body.keyId;
 
   try {
-    // Tìm API key theo ID
     const apiKey = await ApiKey.findById(keyId);
     if (!apiKey) {
-      return res.json({ success: false, message: 'API Key không tồn tại.' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'API Key không tồn tại.' });
     }
 
-    // Đảo ngược trạng thái kích hoạt
     apiKey.enabled = !apiKey.enabled;
     await apiKey.save();
-
-    // Gửi phản hồi về client
     res.json({
       success: true,
       enabled: apiKey.enabled,
-      message: apiKey.enabled ? 'API Key đã được kích hoạt.' : 'API Key đã bị vô hiệu hóa.',
+      message: apiKey.enabled
+        ? 'API Key đã được kích hoạt.'
+        : 'API Key đã bị vô hiệu hóa.',
     });
   } catch (error) {
-    console.error(error);
-    res.json({ success: false, message: 'Có lỗi xảy ra khi cập nhật API Key.' });
+    req.flash('error', 'Đã có lỗi xảy ra. Vui lòng thử lại sau.');
+    next(error); // Sử dụng middleware xử lý lỗi chung
   }
 };

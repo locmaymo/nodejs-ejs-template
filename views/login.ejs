@@ -1,0 +1,8 @@
+
+  <h1>Đăng nhập</h1>
+  <form action="/login" method="POST">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label for="password">Mật khẩu:</label>
+    <input type="password" id="password" name="password" required>
+    <button type="submit">Đăng nhập</button>
+  </form>

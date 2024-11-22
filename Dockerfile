@@ -39,4 +39,4 @@ USER appuser
 EXPOSE 3000
 
 # Khởi chạy ứng dụng
-CMD ["node", "server.js"]
+CMD ["node", "app.js"]
