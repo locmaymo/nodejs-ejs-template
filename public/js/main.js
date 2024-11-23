@@ -31,29 +31,26 @@ document.addEventListener('DOMContentLoaded', function () {
               btn.textContent = 'Kích hoạt';
             }
 
-            // Hiển thị thông báo
-            showFlashMessage('success', data.message);
+            // Sử dụng Toast từ scripts.ejs
+            Toast.fire({
+              icon: 'success',
+              title: data.message
+            });
           } else {
             // Hiển thị thông báo lỗi
-            showFlashMessage('error', data.message);
+            Toast.fire({
+              icon: 'error',
+              title: data.message
+            });
           }
         })
         .catch((error) => {
           console.error('Error:', error);
-          showFlashMessage('error', 'Có lỗi xảy ra khi kết nối đến server.');
+          Toast.fire({
+            icon: 'error',
+            title: 'Có lỗi xảy ra khi kết nối đến server.'
+          });
         });
     });
   });
-
-  // Hàm hiển thị thông báo flash
-  function showFlashMessage(type, message) {
-    Swal.fire({
-      icon: type,
-      title: message,
-      position: 'top-end',
-      toast: true,
-      showConfirmButton: false,
-      timer: 3000,
-    });
-  }
 });

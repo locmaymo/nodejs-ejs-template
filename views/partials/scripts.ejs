@@ -1,31 +1,36 @@
 <script>
-    <% if (successMessages && successMessages.length > 0) { %>
-      <% successMessages.forEach(function(msg) { %>
-        Swal.fire({
-          icon: 'success',
-          title: '<%= msg %>',
-          position: 'top-end',
-          toast: true,
-          showConfirmButton: false,
-          timer: 3000
-        });
-      <% }); %>
-    <% } %>
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    showCloseButton: true,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+  });
 
-    <% if (errorMessages && errorMessages.length > 0) { %>
-      <% errorMessages.forEach(function(msg) { %>
-        Swal.fire({
-          icon: 'error',
-          title: '<%= msg %>',
-          position: 'top-end',
-          toast: true,
-          showConfirmButton: false,
-          timer: 3000
-        });
-      <% }); %>
-    <% } %>
+
+  <% if (successMessages && successMessages.length > 0) { %>
+    <% successMessages.forEach(function (msg) { %>
+      Toast.fire({
+        icon: "success",
+        title: '<%= msg %>',
+      });
+    <% }); %>
+  <% } %>
+
+  <% if (errorMessages && errorMessages.length > 0) { %>
+    <% errorMessages.forEach(function(msg) { %>
+      Toast.fire({
+        icon: "error",
+        title: '<%= msg %>',
+      });
+    <% }); %>
+  <% } %>
 </script>
-
 
 <script src="/js/main.js"></script>
 
