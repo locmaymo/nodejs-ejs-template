@@ -1,21 +1,13 @@
-/* public/css/styles.css */
-
-#notification {
-  margin-top: 1em;
-  color: green;
+/* Adjust the toast position to be below the navbar */
+.custom-toast-position {
+  top: 80px !important; /* Move the toast down 80px; adjust as needed */
 }
 
-.alert {
-  padding: 1em;
-  margin-bottom: 1em;
-}
-
-.alert-success {
-  background-color: #e5f8e5;
-  color: #2d702d;
-}
-
-.alert-danger {
-  background-color: #fde5e5;
-  color: #b22222;
+/* On mobile devices, ensure the toast is centered and below the navbar */
+@media only screen and (max-width: 768px) {
+  .custom-toast-position {
+    top: 0px !important; /* Move the toast down 80px; adjust as needed */
+    left: 50% !important; /* Center horizontally */
+    transform: translateX(-50%) !important; /* Center the container */
+  }
 }

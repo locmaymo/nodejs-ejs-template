@@ -1,18 +1,29 @@
 <script>
+  // Determine the toast position based on screen width
+  let toastPosition = 'top-end';
+  if (window.innerWidth <= 768) {
+    // For mobile devices, center the toast at the top
+    toastPosition = 'top';
+  }
+
+  // Configure the Toast with SweetAlert2
   const Toast = Swal.mixin({
     toast: true,
-    position: "top-end",
+    position: toastPosition,
     showConfirmButton: false,
     showCloseButton: true,
     timer: 3000,
     timerProgressBar: true,
+    customClass: {
+      container: 'custom-toast-position' // Add a custom class
+    },
     didOpen: (toast) => {
       toast.onmouseenter = Swal.stopTimer;
       toast.onmouseleave = Swal.resumeTimer;
     }
   });
 
-
+  // Trigger the toast notifications as before
   <% if (successMessages && successMessages.length > 0) { %>
     <% successMessages.forEach(function (msg) { %>
       Toast.fire({
