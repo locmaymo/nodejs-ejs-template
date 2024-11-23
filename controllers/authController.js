@@ -4,6 +4,11 @@ dotenv.config();
 
 exports.getLogin = (req, res) => {
   res.render('login', {
+    showSidebar: false,
+    showNavbar: false,
+    showFooter: true,
+    showUtilities: false,
+    containerFluid: false,
     title: 'Đăng nhập',
     csrfToken: req.csrfToken(),
     error: null,
